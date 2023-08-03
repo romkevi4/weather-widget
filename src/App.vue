@@ -1,9 +1,16 @@
+<script setup lang="ts">
+  import WeatherInfo from './components/WeatherInfo.vue'
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<!--  <nav>-->
+<!--    <router-link to="/">Home</router-link> |-->
+<!--    <router-link to="/about">About</router-link>-->
+<!--  </nav>-->
+<!--  <router-view/>-->
+  <div class="m-auto p-3 w-full bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
+    <WeatherInfo />
+  </div>
 </template>
 
 <style>
@@ -28,3 +35,9 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<!--<script>-->
+<!--import WeatherInfo from '@/components/WeatherInfo';-->
+<!--export default {-->
+<!--  components: {WeatherInfo}-->
+<!--}-->
+<!--</script>-->
