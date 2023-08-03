@@ -1,0 +1,18 @@
+/* Style normalizer */
+@import './normalize/normalize.css';
+
+/* Fonts */
+@import './fonts/font.css';
+
+/* tailwindcss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  color: #000;
+  font-size: 16px;
+  display: flex;
+}
