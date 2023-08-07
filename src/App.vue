@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import WeatherInfo from './components/WeatherInfo.vue'
+  import WeatherWidget from './components/WeatherWidget.vue'
 </script>
 
 <template>
@@ -9,7 +9,7 @@
 <!--  </nav>-->
 <!--  <router-view/>-->
   <div class="m-auto p-3 w-full bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
-    <WeatherInfo />
+    <WeatherWidget />
   </div>
 </template>
 
