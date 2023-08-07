@@ -14,8 +14,8 @@
 <template>
   <div class="w-full flex items-center justify-between">
     <p class="m-0 font-custom font-bold text-l text-start">{{ isSettings ? 'Settings' : 'London, UK' }}</p>
-    <button type="button" @click="onSettings">
-      <img :src="isSettings ? iconClose : iconSettings " alt="icon" class="w-7 h-7">
-    </button>
+<!--    <button type="button" @click="onSettings">-->
+<!--      <img :src="isSettings ? iconClose : iconSettings " alt="icon" class="w-7 h-7">-->
+<!--    </button>-->
   </div>
 </template>

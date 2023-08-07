@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         custom: ['Inter', 'sans-serif'],
       },
+      rotate: {
+        custom: ['-120deg']
+      }
     },
   },
   plugins: [],
