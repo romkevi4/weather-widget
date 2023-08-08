@@ -1,7 +1,28 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
+
+  import { useGlobalStore } from '../../store/store'
+  import { getWeather } from '@/api/getWeather'
+
   import iconBurgerMenu from '@/assets/icons/icon-burger-menu.svg'
   import iconDeleteBasket from '@/assets/icons/icon-delete-basket.svg'
   import iconEnterArrow from '@/assets/icons/icon-enter-arrow.svg'
+  import { IWeatherData } from '../../models';
+
+
+  const store = useGlobalStore()
+  const nameTown = ref<string>()
+
+  const onSubmit = async (evt: Event) => {
+    evt.preventDefault()
+
+    try {
+      const data: IWeatherData = await getWeather(nameTown)
+      store.setWeatherData(data)
+    } catch (err) {
+      console.error('Ошибка при получении данных: ', err);
+    }
+  }
 </script>
 
 <template>
@@ -29,6 +50,7 @@
           type="text"
           class="mr-3 py-2 px-4 w-full border outline-0 focus:ring-1 focus:ring-blue-500 rounded-md font-Inter"
           id="elementsInput"
+          v-model="nameTown"
         >
 
         <button type="submit">

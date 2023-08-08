@@ -48,11 +48,6 @@ interface IWeatherData {
   cod: number
 }
 
-interface PropsWeatherCity {
-  name: string
-}
-
 export type {
-  IWeatherData,
-  PropsWeatherCity
+  IWeatherData
 }
