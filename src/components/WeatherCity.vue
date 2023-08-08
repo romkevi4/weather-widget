@@ -1,7 +1,14 @@
 <script setup lang="ts">
+  import { defineProps } from 'vue';
+  import { useGlobalStore } from '../../store/store'
+  import { PropsWeatherCity } from '../../models'
+
   import weather from '../assets/icons/weather/broken-clouds.png'
   import iconWindSpeed from '../assets/icons/icon-arrow.png'
   import iconAtmosphericPressure from '../assets/icons/icon-barometer.png'
+
+  // defineProps<PropsWeatherCity>()
+  const store = useGlobalStore()
 </script>
 
 <template>
