@@ -19,19 +19,22 @@
 
   onMounted( async () => {
     try {
-      let citiesWeather = localStorage.getItem('citiesWeather')
-      if (citiesWeather) {
-        const citiesWeatherArr = JSON.parse(citiesWeather)
-        citiesWeatherArr.forEach((city: IWeatherData) => store.setWeatherData(city))
-      } else {
-        const data: IWeatherData = await getWeather('Paris')
-        store.setWeatherData(data)
-        currentArrWithWeatherData && localStorage.setItem('citiesWeather', JSON.stringify(currentArrWithWeatherData))
-      }
+      const data: IWeatherData = await getWeather('Moscow')
+      store.setWeatherData(data)
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
     }
   })
+
+  function calculateDewPoint(temperature: number, humidity: number): number {
+    const a = 17.27;
+    const b = 237.7;
+
+    const alpha = (a * temperature) / (b + temperature) + Math.log(humidity / 100);
+    const dewPoint = (b * alpha) / (a - alpha);
+
+    return +dewPoint.toFixed(0);
+  }
 
   const onSettings = () => isSettings.value = !isSettings.value
 </script>
@@ -46,11 +49,16 @@
       <WeatherCity
         v-for="(cityObj, index) in currentArrWithWeatherData"
         :key="index"
-        :nameCity="correctText(cityObj.name)"
+        :name-city="correctText(cityObj.name)"
         :country="cityObj.sys.country.toUpperCase()"
         :temp="Math.round(cityObj.main.temp)"
         :feels-like="Math.round(cityObj.main.feels_like)"
-        :descriptionWeather="correctText(cityObj.weather[0].description)"
+        :description-weather="correctText(cityObj.weather[0].description)"
+        :wind-speed="+cityObj.wind.speed.toFixed(1)"
+        :pressure="cityObj.main.pressure"
+        :humidity="cityObj.main.humidity"
+        :dew-point="calculateDewPoint(cityObj.main.temp, cityObj.main.humidity)"
+        :visibility="+(cityObj.visibility/1000).toFixed(1)"
       />
     </div>
 
