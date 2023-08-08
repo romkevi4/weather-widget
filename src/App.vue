@@ -3,10 +3,9 @@
 
   import { useGlobalStore } from '../store/store'
   import { getWeather } from '@/api/getWeather'
-  import { IWeatherData } from '../models';
+  import { IWeatherData } from '../models'
   import correctText from '@/utils/correctText';
 
-  // import WeatherWidget from './components/WeatherWidget.vue'
   import WeatherCity from './components/WeatherCity.vue'
   import WeatherSettings from './components/WeatherSettings.vue'
 
@@ -15,13 +14,20 @@
 
   // Вместо false должен прилетать пропс
   const store = useGlobalStore()
-  let localArrWithWeatherData = store.localWeatherData
+  let currentArrWithWeatherData = store.currentWeatherData
   let isSettings = ref<boolean>(false)
 
   onMounted( async () => {
     try {
-      const data: IWeatherData = await getWeather('Moscow')
-      store.setWeatherData(data)
+      let citiesWeather = localStorage.getItem('citiesWeather')
+      if (citiesWeather) {
+        const citiesWeatherArr = JSON.parse(citiesWeather)
+        citiesWeatherArr.forEach((city: IWeatherData) => store.setWeatherData(city))
+      } else {
+        const data: IWeatherData = await getWeather('Paris')
+        store.setWeatherData(data)
+        currentArrWithWeatherData && localStorage.setItem('citiesWeather', JSON.stringify(currentArrWithWeatherData))
+      }
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
     }
@@ -31,14 +37,14 @@
 </script>
 
 <template>
-  <section class="m-0 p-3 w-full relative bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
+  <section class="m-0 p-3 w-full min-h-custom relative bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
     <button type="button" @click="onSettings" class="absolute top-2.5 right-2.5">
       <img :src="isSettings ? iconClose : iconSettings " alt="icon" class="w-7 h-7">
     </button>
 
     <div class="w-full flex flex-col items-center justify-between" v-if="!isSettings">
       <WeatherCity
-        v-for="(cityObj, index) in localArrWithWeatherData"
+        v-for="(cityObj, index) in currentArrWithWeatherData"
         :key="index"
         :nameCity="correctText(cityObj.name)"
         :country="cityObj.sys.country.toUpperCase()"

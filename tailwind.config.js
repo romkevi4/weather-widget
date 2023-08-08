@@ -11,6 +11,9 @@ module.exports = {
       },
       rotate: {
         custom: ['-120deg']
+      },
+      minHeight: {
+        custom: ['3rem']
       }
     },
   },

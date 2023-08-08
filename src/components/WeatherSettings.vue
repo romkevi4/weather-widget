@@ -14,7 +14,6 @@
   const nameTown = ref<string>()
 
   const onSubmit = async (evt: Event) => {
-    evt.preventDefault()
 
     try {
       const data: IWeatherData = await getWeather(nameTown)
@@ -41,7 +40,7 @@
       </div>
     </div>
 
-    <form class="mb-6 w-full flex flex-col items-start justify-start">
+    <form class="mb-6 w-full flex flex-col items-start justify-start" @submit.prevent="onSubmit">
       <p class="mb-1 font-custom font-bold text-l text-start self-start">Add location:</p>
 
       <div class="w-full flex items-center justify-between">

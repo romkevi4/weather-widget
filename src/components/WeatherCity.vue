@@ -17,7 +17,11 @@
 
   const changeWeatherIcon = (str: string): string => {
     const newStr = str.replace(/ /g, '-').toLowerCase()
-    return `@/assets/icons/weather/${newStr}.png`
+    return `../assets/icons/weather/${newStr}.png`
+  }
+
+  const changeStr = (str: string): string => {
+    return str.replace(/ /g, '-').toLowerCase()
   }
 </script>
 
@@ -25,7 +29,7 @@
   <p class="font-custom font-bold text-l text-start self-start">{{ `${nameCity}, ${country}` }}</p>
 
   <div class="mt-7 mb-7 flex items-center justify-between">
-    <img :src="changeWeatherIcon(descriptionWeather)" alt="icon-weather" class="w-24 h-24">
+    <div :style="{ backgroundImage: `url('src/assets/icons/weather/${changeStr(descriptionWeather)}.png')` }" class="w-24 h-24"></div>
     <span class="ml-7 font-custom font-bold text-4xl">{{`${temp}&deg;С`}}</span>
   </div>
 
