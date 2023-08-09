@@ -18,10 +18,10 @@
     pressure: number,
     humidity:number,
     dewPoint: number,
-    visibility: number,
+    visibility: number
   }
 
-  const props = defineProps<PropsWeatherCity  >()
+  const props = defineProps<PropsWeatherCity>()
 
   const styleObject = reactive({
     transform: `rotate(${props.windDeg - 90}deg)`

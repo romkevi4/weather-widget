@@ -44,11 +44,11 @@
         :feels-like="Math.round(cityObj.main.feels_like)"
         :description-weather="correctText(cityObj.weather[0].description)"
         :wind-speed="+cityObj.wind.speed.toFixed(1)"
+        :wind-deg="cityObj.wind.deg"
         :pressure="cityObj.main.pressure"
         :humidity="cityObj.main.humidity"
         :dew-point="calculateDewPoint(cityObj.main.temp, cityObj.main.humidity)"
         :visibility="cityObj.visibility/1000"
-        :wind-deg="cityObj.wind.deg"
       />
     </div>
 

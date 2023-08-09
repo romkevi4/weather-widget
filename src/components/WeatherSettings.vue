@@ -1,33 +1,52 @@
 <script setup lang="ts">
-  import { ref, defineProps } from 'vue'
+  import { ref } from 'vue'
 
   import { useGlobalStore } from '../../store/store'
   import { getWeather } from '@/api/getWeather'
   import { IWeatherData } from '../../models';
+  import { saveData } from '@/utils/saveData'
 
   import iconBurgerMenu from '@/assets/icons/icon-burger-menu.svg'
   import iconDeleteBasket from '@/assets/icons/icon-delete-basket.svg'
   import iconEnterArrow from '@/assets/icons/icon-enter-arrow.svg'
 
-
   const store = useGlobalStore()
   const nameTown = ref<string>('')
-  // const props = defineProps()
 
   const onAddCity = async () => {
     try {
       const data: IWeatherData = await getWeather(nameTown.value)
-      store.setWeatherData(data)
-      store.setAddCities(data.name)
-      localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
+      saveData(data)
+      nameTown.value = ''
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
     }
   }
 
   const onDeleteCity = async (evt: Event) => {
-    console.log(evt.target.id)
-    const currentWeatherArr = store.currentWeatherData.filter((objWithData: IWeatherData) => objWithData.id !== evt.target.id)
+    const { id } = evt.target as HTMLFormElement
+    if (id) {
+      const indexWeather = store.currentWeatherData.findIndex((obj: IWeatherData) => obj.id === +id)
+
+      console.log(indexWeather)
+      console.log(store.currentWeatherData)
+      if (indexWeather !== -1 ) {
+        store.currentWeatherData.splice(indexWeather, 1)
+
+        const indexCity = store.citiesList.findIndex((str: string) => str === store.currentWeatherData[indexWeather].name)
+        if (indexCity !== -1) {
+          store.citiesList.splice(indexCity, 1)
+          localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
+        }
+      }
+
+      console.log(store.currentWeatherData)
+      if (store.currentWeatherData.length === 0) {
+        // store.currentWeatherData = []
+        // store.citiesList = []
+        localStorage.removeItem('citiesList')
+      }
+    }
   }
 </script>
 
@@ -63,7 +82,7 @@
           class="mr-3 py-2 px-4 w-full border outline-0 focus:ring-1 focus:ring-blue-500 rounded-md font-Inter"
           id="elementsInput"
           v-model="nameTown"
-          placeholder="Введите название города"
+          placeholder="Enter the name of the city"
         >
 
         <button type="submit">
