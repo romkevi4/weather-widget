@@ -4,7 +4,8 @@
   import iconWindSpeed from '../assets/icons/icon-arrow.png'
   import iconBarometer from '../assets/icons/icon-barometer.png'
 
-  import { changeWeatherIcon } from '@/utils/changeWeatherIcon';
+  import { changeWeatherIcon } from '@/utils/changeWeatherIcon'
+  import { choiceWindDirection } from '@/utils/choiceWindDirection'
 
   interface PropsWeatherCity {
     nameCity: string,
@@ -16,36 +17,22 @@
     pressure: number,
     humidity:number,
     dewPoint: number,
-    visibility: number
+    visibility: number,
+    degWind: number
   }
 
   const props = defineProps<PropsWeatherCity>()
 
-  // const changeWeatherIcon = (str: string): string => {
-  //   const newStr = str.replace(/ /g, '-').toLowerCase()
-  //   return `../assets/icons/weather/${newStr}.png`
-  // }
-
-  const changeStr = (str: string): string => {
-    return str.replace(/ /g, '-').toLowerCase()
-  }
-
   const styleObject = reactive({
-    color: 'red',
-    fontSize: '13px'
+    transform: `rotate(${props.degWind - 90}deg)`
   })
-
-  // const choiceWindDirection = (deg: number): string => {
-  //
-  // }
-
 </script>
 
 <template>
   <p class="font-custom font-bold text-l text-start self-start">{{ `${nameCity}, ${country}` }}</p>
 
   <div class="mt-7 mb-7 flex items-center justify-between">
-    <img :src="changeWeatherIcon(props.descriptionWeather)" alt="icon-weather" class="w-24 h-24">
+    <img :src="changeWeatherIcon(descriptionWeather)" alt="icon-weather" class="w-24 h-24">
     <span class="ml-7 font-custom font-bold text-4xl">{{`${temp}&deg;С`}}</span>
   </div>
 
@@ -54,8 +41,8 @@
 
     <div class="mb-3 w-full flex items-center justify-start">
       <div class="mr-24 flex items-center justify-start">
-        <img :src="iconWindSpeed" alt="windSpeed" class="w-4 h-4 rotate-custom">
-        <span class="ml-2 font-custom text-l text-start">{{ `${windSpeed}m/s SSE` }}</span>
+        <img :src="iconWindSpeed" alt="windSpeed" class="w-4 h-4" :style="styleObject">
+        <span class="ml-2 font-custom text-l text-start">{{ `${windSpeed}m/s ${choiceWindDirection(degWind)}` }}</span>
       </div>
 
       <div class="flex items-center justify-start">

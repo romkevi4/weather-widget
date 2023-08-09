@@ -19,7 +19,7 @@
 
   onMounted( async () => {
     try {
-      const data: IWeatherData = await getWeather('Moscow')
+      const data: IWeatherData = await getWeather('Malibu')
       store.setWeatherData(data)
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
@@ -59,6 +59,7 @@
         :humidity="cityObj.main.humidity"
         :dew-point="calculateDewPoint(cityObj.main.temp, cityObj.main.humidity)"
         :visibility="cityObj.visibility/1000"
+        :deg-wind="cityObj.wind.deg"
       />
     </div>
 
