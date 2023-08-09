@@ -3,11 +3,11 @@
 
   import { useGlobalStore } from '../../store/store'
   import { getWeather } from '@/api/getWeather'
+  import { IWeatherData } from '../../models';
 
   import iconBurgerMenu from '@/assets/icons/icon-burger-menu.svg'
   import iconDeleteBasket from '@/assets/icons/icon-delete-basket.svg'
   import iconEnterArrow from '@/assets/icons/icon-enter-arrow.svg'
-  import { IWeatherData } from '../../models';
 
 
   const store = useGlobalStore()

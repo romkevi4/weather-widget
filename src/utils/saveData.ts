@@ -1,11 +1,8 @@
-// import {IWeatherData} from '../../models';
-// import {getWeather} from '@/api/getWeather';
-//
-// export default async function saveData(data, store) {
-// 	try {
-// 		const data: IWeatherData = await getWeather('Moscow')
-// 		store.setWeatherData(data)
-// 	} catch (err) {
-// 		console.error('Ошибка при получении данных: ', err);
-// 	}
-// }
+import { IWeatherData } from '../../models'
+import { useGlobalStore } from '../../store/store'
+
+export function saveData(data: IWeatherData): void {
+	const store = useGlobalStore()
+	store.setWeatherData(data)
+	store.setAddCities(data.name)
+}
