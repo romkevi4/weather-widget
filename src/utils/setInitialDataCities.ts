@@ -4,7 +4,7 @@ import { getWeatherCurrentLocation } from '@/api/getWeatherCurrentLocation'
 import { useGlobalStore } from '../../store/store'
 import { saveData } from '@/utils/saveData'
 
-export async function getInitialDataCities() {
+export async function setInitialDataCities() {
 	const store = useGlobalStore()
 	const citiesList = localStorage.getItem('citiesList')
 
@@ -25,14 +25,12 @@ export async function getInitialDataCities() {
 
 				const data: IWeatherData = await getWeatherCurrentLocation(latitude, longitude)
 				saveData(data)
-				localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
 			},
 			async (err) => {
 				console.error('Ошибка получения местоположения: ', err)
 
 				const data: IWeatherData = await getWeather('Venice')
 				saveData(data)
-				localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
 			}
 		)
 	}

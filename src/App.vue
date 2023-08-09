@@ -4,9 +4,9 @@
   import { useGlobalStore } from '../store/store'
   import { getWeather } from '@/api/getWeather'
   import { IWeatherData } from '../models'
-  import correctText from '@/utils/correctText'
+  import { correctText } from '@/utils/correctText'
   import { calculateDewPoint } from '@/utils/calculateDewPoint'
-  import { getInitialDataCities } from '@/utils/getInitialDataCities'
+  import { setInitialDataCities } from '@/utils/setInitialDataCities'
 
   import WeatherCity from './components/WeatherCity.vue'
   import WeatherSettings from './components/WeatherSettings.vue'
@@ -14,28 +14,12 @@
   import iconSettings from './assets/icons/icon-settings.svg'
   import iconClose from './assets/icons/icon-close.svg'
 
-  // Вместо false должен прилетать пропс
   const store = useGlobalStore()
   let isSettings = ref<boolean>(false)
 
   onMounted( async () => {
     try {
-      // const data: IWeatherData = await getWeather('Kazan')
-      // store.setWeatherData(data)
-
-      await getInitialDataCities()
-
-      // let citiesList = localStorage.getItem('citiesList')
-      // if (citiesList) {
-      //   async function getDataOfCurrentCities(cityName: string) {
-      //     const data: IWeatherData = await getWeather(cityName)
-      //     store.setWeatherData(data)
-      //     store.setAddCities(cityName)
-      //   }
-      //
-      //   const citiesListArr = JSON.parse(citiesList)
-      //   citiesListArr.forEach((city: string) => getDataOfCurrentCities(city))
-      // }
+      await setInitialDataCities()
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
     }
