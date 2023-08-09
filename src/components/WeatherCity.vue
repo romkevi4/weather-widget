@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  import { defineProps } from 'vue'
+  import { defineProps, reactive } from 'vue'
 
-  import weather from '../assets/icons/weather/broken-clouds.png'
   import iconWindSpeed from '../assets/icons/icon-arrow.png'
   import iconBarometer from '../assets/icons/icon-barometer.png'
+
+  import { changeWeatherIcon } from '@/utils/changeWeatherIcon';
 
   interface PropsWeatherCity {
     nameCity: string,
@@ -18,23 +19,33 @@
     visibility: number
   }
 
-  defineProps<PropsWeatherCity>()
+  const props = defineProps<PropsWeatherCity>()
 
-  const changeWeatherIcon = (str: string): string => {
-    const newStr = str.replace(/ /g, '-').toLowerCase()
-    return `../assets/icons/weather/${newStr}.png`
-  }
+  // const changeWeatherIcon = (str: string): string => {
+  //   const newStr = str.replace(/ /g, '-').toLowerCase()
+  //   return `../assets/icons/weather/${newStr}.png`
+  // }
 
   const changeStr = (str: string): string => {
     return str.replace(/ /g, '-').toLowerCase()
   }
+
+  const styleObject = reactive({
+    color: 'red',
+    fontSize: '13px'
+  })
+
+  // const choiceWindDirection = (deg: number): string => {
+  //
+  // }
+
 </script>
 
 <template>
   <p class="font-custom font-bold text-l text-start self-start">{{ `${nameCity}, ${country}` }}</p>
 
   <div class="mt-7 mb-7 flex items-center justify-between">
-    <div :style="{ backgroundImage: `url('src/assets/icons/weather/${changeStr(descriptionWeather)}.png')` }" class="w-24 h-24"></div>
+    <img :src="changeWeatherIcon(props.descriptionWeather)" alt="icon-weather" class="w-24 h-24">
     <span class="ml-7 font-custom font-bold text-4xl">{{`${temp}&deg;С`}}</span>
   </div>
 
@@ -60,7 +71,7 @@
     </div>
 
     <div class="mb-20 w-full flex items-center justify-start">
-      <span class="font-custom text-l text-start">{{ `Visibility: ${visibility}km` }}</span>
+      <span class="font-custom text-l text-start">{{ `Visibility: ${visibility.toFixed(1)}km` }}</span>
     </div>
   </div>
 </template>

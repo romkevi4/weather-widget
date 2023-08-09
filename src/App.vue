@@ -58,7 +58,7 @@
         :pressure="cityObj.main.pressure"
         :humidity="cityObj.main.humidity"
         :dew-point="calculateDewPoint(cityObj.main.temp, cityObj.main.humidity)"
-        :visibility="+(cityObj.visibility/1000).toFixed(1)"
+        :visibility="cityObj.visibility/1000"
       />
     </div>
 
