@@ -14,17 +14,17 @@
     feelsLike: number,
     descriptionWeather: string,
     windSpeed: number
+    windDeg: number
     pressure: number,
     humidity:number,
     dewPoint: number,
     visibility: number,
-    degWind: number
   }
 
   const props = defineProps<PropsWeatherCity>()
 
   const styleObject = reactive({
-    transform: `rotate(${props.degWind - 90}deg)`
+    transform: `rotate(${props.windDeg - 90}deg)`
   })
 </script>
 
@@ -36,13 +36,13 @@
     <span class="ml-7 font-custom font-bold text-4xl">{{`${temp}&deg;С`}}</span>
   </div>
 
-  <div class="w-fill flex flex-col items-center justify-between">
-    <span class="mb-3 font-custom text-l text-start">{{`Feels like ${feelsLike}&deg;С. ${descriptionWeather}. Light breeze`}}</span>
+  <div class="w-fill flex flex-col items-center justify-start">
+    <span class="mb-3 w-full font-custom text-l text-start">{{`Feels like ${feelsLike}&deg;С. ${descriptionWeather}. Light breeze`}}</span>
 
     <div class="mb-3 w-full flex items-center justify-start">
       <div class="mr-24 flex items-center justify-start">
         <img :src="iconWindSpeed" alt="windSpeed" class="w-4 h-4" :style="styleObject">
-        <span class="ml-2 font-custom text-l text-start">{{ `${windSpeed}m/s ${choiceWindDirection(degWind)}` }}</span>
+        <span class="ml-2 font-custom text-l text-start">{{ `${windSpeed}m/s ${choiceWindDirection(windDeg)}` }}</span>
       </div>
 
       <div class="flex items-center justify-start">

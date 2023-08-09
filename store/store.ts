@@ -9,7 +9,9 @@ export const useGlobalStore = defineStore('store', {
   actions: {
     setWeatherData(data: IWeatherData) {
       this.currentWeatherData.push(data)
-      this.citiesList.push(data.name)
     },
+    setAddCities(city: string) {
+      this.citiesList.push(city)
+    }
   }
 })

@@ -4,7 +4,9 @@
   import { useGlobalStore } from '../store/store'
   import { getWeather } from '@/api/getWeather'
   import { IWeatherData } from '../models'
-  import correctText from '@/utils/correctText';
+  import correctText from '@/utils/correctText'
+  import { calculateDewPoint } from '@/utils/calculateDewPoint'
+  import { getInitialDataCities } from '@/utils/getInitialDataCities'
 
   import WeatherCity from './components/WeatherCity.vue'
   import WeatherSettings from './components/WeatherSettings.vue'
@@ -14,27 +16,30 @@
 
   // Вместо false должен прилетать пропс
   const store = useGlobalStore()
-  let currentArrWithWeatherData = store.currentWeatherData
   let isSettings = ref<boolean>(false)
 
   onMounted( async () => {
     try {
-      const data: IWeatherData = await getWeather('Malibu')
-      store.setWeatherData(data)
+      // const data: IWeatherData = await getWeather('Kazan')
+      // store.setWeatherData(data)
+
+      await getInitialDataCities()
+
+      // let citiesList = localStorage.getItem('citiesList')
+      // if (citiesList) {
+      //   async function getDataOfCurrentCities(cityName: string) {
+      //     const data: IWeatherData = await getWeather(cityName)
+      //     store.setWeatherData(data)
+      //     store.setAddCities(cityName)
+      //   }
+      //
+      //   const citiesListArr = JSON.parse(citiesList)
+      //   citiesListArr.forEach((city: string) => getDataOfCurrentCities(city))
+      // }
     } catch (err) {
       console.error('Ошибка при получении данных: ', err);
     }
   })
-
-  function calculateDewPoint(temperature: number, humidity: number): number {
-    const a = 17.27;
-    const b = 237.7;
-
-    const alpha = (a * temperature) / (b + temperature) + Math.log(humidity / 100);
-    const dewPoint = (b * alpha) / (a - alpha);
-
-    return +dewPoint.toFixed(0);
-  }
 
   const onSettings = () => isSettings.value = !isSettings.value
 </script>
@@ -47,7 +52,7 @@
 
     <div class="w-full flex flex-col items-center justify-between" v-if="!isSettings">
       <WeatherCity
-        v-for="(cityObj, index) in currentArrWithWeatherData"
+        v-for="(cityObj, index) in store.currentWeatherData"
         :key="index"
         :name-city="correctText(cityObj.name)"
         :country="cityObj.sys.country.toUpperCase()"
@@ -59,7 +64,7 @@
         :humidity="cityObj.main.humidity"
         :dew-point="calculateDewPoint(cityObj.main.temp, cityObj.main.humidity)"
         :visibility="cityObj.visibility/1000"
-        :deg-wind="cityObj.wind.deg"
+        :wind-deg="cityObj.wind.deg"
       />
     </div>
 

@@ -9,9 +9,6 @@ module.exports = {
       fontFamily: {
         custom: ['Inter', 'sans-serif'],
       },
-      rotate: {
-        custom: ['-120deg']
-      },
       minHeight: {
         custom: ['3rem']
       }
