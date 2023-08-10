@@ -25,27 +25,20 @@
 
   const onDeleteCity = async (evt: Event) => {
     const { id } = evt.target as HTMLFormElement
+
     if (id) {
       const indexWeather = store.currentWeatherData.findIndex((obj: IWeatherData) => obj.id === +id)
+      const indexCity = store.citiesList.findIndex((str: string) => str === store.currentWeatherData[indexWeather].name)
 
       console.log(indexWeather)
       console.log(store.currentWeatherData)
-      if (indexWeather !== -1 ) {
+      if (indexWeather !== -1 && indexCity !== -1) {
         store.currentWeatherData.splice(indexWeather, 1)
-
-        const indexCity = store.citiesList.findIndex((str: string) => str === store.currentWeatherData[indexWeather].name)
-        if (indexCity !== -1) {
-          store.citiesList.splice(indexCity, 1)
-          localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
-        }
+        store.citiesList.splice(indexCity, 1)
+        localStorage.setItem('citiesList', JSON.stringify(store.citiesList))
       }
 
-      console.log(store.currentWeatherData)
-      if (store.currentWeatherData.length === 0) {
-        // store.currentWeatherData = []
-        // store.citiesList = []
-        localStorage.removeItem('citiesList')
-      }
+      (store.currentWeatherData.length === 0 && store.citiesList.length === 0) && localStorage.removeItem('citiesList')
     }
   }
 </script>
