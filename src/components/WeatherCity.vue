@@ -6,6 +6,7 @@
 
   import { changeWeatherIcon } from '@/utils/changeWeatherIcon'
   import { choiceWindDirection } from '@/utils/choiceWindDirection'
+  import { choiceDescriptionOfWindSpeed } from '@/utils/choiceDescriptionOfWindSpeed'
 
   interface PropsWeatherCity {
     nameCity: string,
@@ -37,7 +38,7 @@
   </div>
 
   <div class="w-full flex flex-col items-center justify-start">
-    <span class="mb-3 w-full font-custom text-l text-start">{{`Feels like ${feelsLike}&deg;С. ${descriptionWeather}. Light breeze`}}</span>
+    <span class="mb-3 w-full font-custom text-l text-start">{{`Feels like ${feelsLike}&deg;С. ${descriptionWeather}. ${choiceDescriptionOfWindSpeed(windSpeed)}`}}</span>
 
     <div class="mb-12 w-full flex items-start justify-between">
       <div class="mr-16 w-1/2 flex flex-col items-start justify-start">

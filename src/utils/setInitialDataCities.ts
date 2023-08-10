@@ -10,7 +10,6 @@ export async function setInitialDataCities() {
 
 	async function getDataOfCurrentCities(cityName: string) {
 		const data: IWeatherData = await getWeather(cityName)
-		console.log(data)
 		store.setWeatherData(data)
 		store.setAddCities(cityName)
 	}

@@ -27,7 +27,7 @@
 </script>
 
 <template>
-  <section class="m-auto p-3 w-full min-h-custom relative bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
+  <section class="m-0 p-3 w-full min-h-custom relative bg-gradient-to-r from-slate-200 via-gray-100 to-slate-200 shadow-gray-500 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-between items-center">
     <button type="button" @click="onSettings" class="absolute top-2.5 right-2.5">
       <img :src="isSettings ? iconClose : iconSettings " alt="icon" class="w-7 h-7">
     </button>
