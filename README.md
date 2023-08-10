@@ -31,4 +31,4 @@ npm run build
 
 ## Project link
 
-[weather-widget](https://weather-widget-9ya2bcw8z-romkevi4.vercel.app/)
+[weather-widget](https://weather-widget-git-main-romkevi4.vercel.app/)
