@@ -9,8 +9,8 @@
   import WeatherCity from './WeatherCity.vue'
   import WeatherSettings from './WeatherSettings.vue'
 
-  import iconSettings from '../assets/icons/icon-settings.svg'
-  import iconClose from '../assets/icons/icon-close.svg'
+  import iconSettings from '@/assets/icons/icon-settings.svg'
+  import iconClose from '@/assets/icons/icon-close.svg'
 
   const store = useGlobalStore()
   let isSettings = ref<boolean>(false)

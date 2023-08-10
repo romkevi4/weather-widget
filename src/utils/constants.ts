@@ -1,3 +1,8 @@
+const enum EnumServerUrlInfo {
+	OPEN_WEATHER = 'https://api.openweathermap.org/data/2.5/weather',
+	API_KEY = '810e1dfb3697f7d160ec32c41135a7af'
+}
+
 const enum EnumDirectionWind {
 	N = 'N',
 	NNE = 'NNE',
@@ -34,6 +39,7 @@ const enum EnumWindDescription {
 }
 
 export {
+	EnumServerUrlInfo,
 	EnumDirectionWind,
 	EnumWindDescription
 }

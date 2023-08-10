@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { defineProps, reactive } from 'vue'
 
-  import iconWindSpeed from '../assets/icons/icon-arrow.png'
-  import iconBarometer from '../assets/icons/icon-barometer.png'
+  import iconWindSpeed from '@/assets/icons/icon-arrow.png'
+  import iconBarometer from '@/assets/icons/icon-barometer.png'
 
   import { changeWeatherIcon } from '@/utils/changeWeatherIcon'
   import { choiceWindDirection } from '@/utils/choiceWindDirection'
