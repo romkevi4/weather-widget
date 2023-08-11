@@ -33,8 +33,8 @@
   <p class="font-custom font-bold text-l text-start self-start">{{ `${nameCity}, ${country}` }}</p>
 
   <div class="mt-7 mb-7 flex items-center justify-between">
-    <img :src="changeWeatherIcon(descriptionWeather)" alt="icon-weather" class="w-24 h-24">
-    <span class="ml-7 font-custom font-bold text-4xl">{{`${temp}&deg;С`}}</span>
+    <img :src="changeWeatherIcon(descriptionWeather)" alt="icon-weather" class="w-40 h-40">
+    <span class="ml-3 font-custom font-bold text-5xl">{{`${temp}&deg;С`}}</span>
   </div>
 
   <div class="w-full flex flex-col items-center justify-start">
